@@ -39,43 +39,47 @@ public class PatientDaoImpl implements PatientDao {
 
 	@Override
 	public int update(Patient patient) {
-		final StringBuilder hql = new StringBuilder().append("UPDATE Patient SET ");
+		final StringBuilder hql = new StringBuilder("UPDATE Patient SET ");
 		final String password = patient.getPassword();
+
 		if (password != null && !password.isEmpty()) {
 			hql.append("password = :password,");
 		}
+
 		hql.append("name = :name,")
-			.append("gender = :gender,")
-			.append("birthday = :birthday,")
-			.append("phone = :phone,")
-			.append("address = :address,")
-			.append("emergency_content = :emergency_content,")
-			.append("emergency_name = :emergency_name,")
-			.append("relation = :relation,")
-			.append("blood_type = :blood_type,")
-			.append("notes = :notes,")
-			.append("profile_picture = :profile_picture, ")
-			.append("update_time = :updateTime ")
-			.append("WHERE email = :email");
+				.append("gender = :gender,")
+				.append("birthday = :birthday,")
+				.append("phone = :phone,")
+				.append("address = :address,")
+				.append("emergencyContent = :emergency_content,")
+				.append("emergencyName = :emergency_name,")
+				.append("relation = :relation,")
+				.append("bloodType = :blood_type,")
+				.append("notes = :notes,")
+				.append("profilePicture = :profile_picture, ")
+				.append("updateTime = :updateTime ")
+				.append("WHERE email = :email");
 
 		Query<?> query = session.createQuery(hql.toString());
+
 		if (password != null && !password.isEmpty()) {
 			query.setParameter("password", password);
 		}
+
 		return query.setParameter("name", patient.getName())
-					.setParameter("gender", patient.getGender())
-					.setParameter("birthday", patient.getBirthday())
-					.setParameter("phone", patient.getPhone())
-					.setParameter("address", patient.getAddress())
-					.setParameter("emergency_content", patient.getEmergencyContent())
-					.setParameter("emergency_name", patient.getEmergencyName())
-					.setParameter("relation", patient.getRelation())
-					.setParameter("blood_type", patient.getBloodType())
-					.setParameter("notes", patient.getNotes())
-					.setParameter("profile_picture", patient.getProfilePicture())
-					.setParameter("updateTime", patient.getUpdateTime())
-					.setParameter("email", patient.getEmail())
-					.executeUpdate();
+				.setParameter("gender", patient.getGender())
+				.setParameter("birthday", patient.getBirthday())
+				.setParameter("phone", patient.getPhone())
+				.setParameter("address", patient.getAddress())
+				.setParameter("emergency_content", patient.getEmergencyContent())
+				.setParameter("emergency_name", patient.getEmergencyName())
+				.setParameter("relation", patient.getRelation())
+				.setParameter("blood_type", patient.getBloodType())
+				.setParameter("notes", patient.getNotes())
+				.setParameter("profile_picture", patient.getProfilePicture())
+				.setParameter("updateTime", patient.getUpdateTime())
+				.setParameter("email", patient.getEmail())
+				.executeUpdate();
 	}
 
 	@Override
